@@ -3,25 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	/* --foreground-rgb: 0, 0, 0; */
+	/* --background-start-rgb: 214, 219, 220; */
+	/* --background-end-rgb: 255, 255, 255; */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+} */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+		rgb(var(--background-start-rgb));
+	box-sizing: border-box;
+}
+
+@layer components {
+	.authInput {
+		@apply py-3 px-4 border-2 border-gray-200 rounded-md tracking-tighter font-normal w-full min-w-[300px] lg:min-w-[360px] 2xl:min-w-[400px] focus:outline-none;
+	}
+
+	.cell {
+		@apply flex justify-center items-center w-[70px] h-[70px] border-[1px] border-gray-200 text-2xl;
+	}
 }
