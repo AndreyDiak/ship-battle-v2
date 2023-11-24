@@ -1,3 +1,4 @@
+'use client';
 import { Game, User } from '@/typings';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import firebaseService, { DB_PATHS } from '../../api/firebase.service';

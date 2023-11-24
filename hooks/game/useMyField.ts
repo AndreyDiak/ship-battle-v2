@@ -81,6 +81,8 @@ export function useMyField(gameID: string) {
 			updatedField[cellIndex].isTouched = true;
 		});
 
+		console.log({ touchedCellsWithShip: DBfield.touchedCellsWithShip });
+
 		// проставляем клетки с попаданиям по кораблям
 		DBfield.touchedCellsWithShip?.forEach((cellIndex) => {
 			updatedField[cellIndex].isTouched = true;
@@ -89,24 +91,17 @@ export function useMyField(gameID: string) {
 
 			const isDead = shipIndexes.every((index) => updatedField[index].isTouched);
 
-			if (isDead) {
+			console.log({ cellIndex, shipIndexes, isDead });
+
+			if (isDead && shipIndexes.length) {
 				shipIndexes.forEach((index) => {
 					updatedField[index].isDead = true;
 				});
 
-				const mode =
-					shipIndexes.length === 1
-						? EDIT_MODE.VERTICAL
-						: shipIndexes[1] - shipIndexes[0] === 1
-						? EDIT_MODE.HORIZONTAL
-						: EDIT_MODE.VERTICAL;
-
 				// получаем все клетки, который надо закрасить вокруг
-				const cellsToFill = CellCalculator.getAllNeighbors(
-					shipIndexes,
-					mode,
-					updatedField[cellIndex].type!,
-				);
+				const cellsToFill = CellCalculator.getAllNeighbors(shipIndexes);
+
+				console.log({ cellsToFill });
 
 				cellsToFill.forEach((index) => {
 					updatedField[index].isTouched = true;

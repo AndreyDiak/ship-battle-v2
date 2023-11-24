@@ -1,2 +1,2 @@
-export { Field } from './EditField';
+export { EditField } from './EditField';
 export { EditSidebar } from './EditSidebar';

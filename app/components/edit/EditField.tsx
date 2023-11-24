@@ -5,7 +5,7 @@ import React from 'react';
 import { Cell } from './Cell';
 import { EditSidebar } from './EditSidebar';
 
-export const Field = React.memo(({ editId }: { editId: string }) => {
+export const EditField = React.memo(({ editId }: { editId: string }) => {
 	/**
 	 * Хук следит за состоянием расставноки кораблей
 	 */
@@ -25,10 +25,7 @@ export const Field = React.memo(({ editId }: { editId: string }) => {
 
 	return (
 		<div className="flex justify-center items-center space-x-12">
-			<div
-				className="flex flex-wrap max-w-[710px] justify-center rounded-sm"
-				onMouseLeave={resetBacklight}
-			>
+			<div className="field" onMouseLeave={resetBacklight}>
 				{field.map((cell) => {
 					return (
 						<Cell key={cell.index} cell={cell} onClick={onClick} onMouseOver={onMouseOver} />
@@ -46,4 +43,4 @@ export const Field = React.memo(({ editId }: { editId: string }) => {
 	);
 });
 
-Field.displayName = 'Field';
+EditField.displayName = 'Field';

@@ -31,10 +31,6 @@ export function useDocs<F extends DB_PATHS, T extends PathToGetType[F]>(
 		[snapshot],
 	);
 
-	useEffect(() => {
-		console.log('value');
-	}, [value]);
-
 	return {
 		value,
 		loading,

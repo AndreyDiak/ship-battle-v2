@@ -1,6 +1,6 @@
 import { DB_PATHS, PathToGetType } from '@/app/api/firebase.service';
 import { QueryConstraint } from 'firebase/firestore';
-import { useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useDocs } from '.';
 /**
  *
@@ -13,10 +13,6 @@ export function useFirstDoc<F extends DB_PATHS, T extends PathToGetType[F]>(
 	...queryConstraints: QueryConstraint[]
 ) {
 	const { value: valuesList, loading, error } = useDocs(collectionName, ...queryConstraints);
-
-	useEffect(() => {
-		console.log('valuesList');
-	}, [valuesList]);
 
 	return useMemo(() => {
 		const value = valuesList.length > 0 ? (valuesList[0] as T) : null;

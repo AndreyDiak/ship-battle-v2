@@ -8,6 +8,13 @@ export const shipTypeToLengthMap: Record<SHIP_TYPE, number> = {
 	[SHIP_TYPE.SMALL]: 1,
 };
 
+export const shipLengthToTypeMap: Record<number, SHIP_TYPE> = {
+	4: SHIP_TYPE.LARGE,
+	3: SHIP_TYPE.BIG,
+	2: SHIP_TYPE.MEDIUM,
+	1: SHIP_TYPE.SMALL,
+};
+
 const NEARBY_CENTRAL_INDEXES: Record<EDIT_MODE, number[]> = {
 	[EDIT_MODE.HORIZONTAL]: [-10, 10],
 	[EDIT_MODE.VERTICAL]: [-1, 1],
@@ -25,6 +32,27 @@ const NEARBY_OUTSIDE_INDEXES: Record<EDIT_MODE, { start: number[]; end: number[]
 };
 
 export class CellCalculator {
+	/**
+	 *
+	 * @param cellIndexes - индексы клеток для корабля
+	 * @returns - тип корабля и тип расстановки
+	 */
+	protected static getShipOptions(cellIndexes: number[]) {
+		const mode =
+			cellIndexes.length === 1
+				? EDIT_MODE.VERTICAL
+				: cellIndexes[1] - cellIndexes[0] === 1
+				? EDIT_MODE.HORIZONTAL
+				: EDIT_MODE.VERTICAL;
+
+		const type = shipLengthToTypeMap[cellIndexes.length];
+
+		return {
+			mode,
+			type,
+		};
+	}
+
 	/**
 	 * Получаем все индексы, которые необходимо закрасить
 	 * @param pivot - индекс, относительно которого мы хотим найти соседние клетки
@@ -64,17 +92,12 @@ export class CellCalculator {
 	/**
 	 * Получаем все соседние индексы, которые мы должны закрасить при потоплении корабля
 	 * @param cellsIndexes - индексы корабля
-	 * @param mode - вертикаль/горизонталь
-	 * @param ship - тип корабля
 	 * @returns массив индексов вокруг корабля для закрашивания
 	 */
-	public static getAllNeighbors(
-		cellsIndexes: number[],
-		mode: EDIT_MODE,
-		ship: SHIP_TYPE,
-	): number[] {
+	public static getAllNeighbors(cellsIndexes: number[]): number[] {
+		const { mode, type } = this.getShipOptions(cellsIndexes);
 		// если корабль однопалубный
-		if (ship === SHIP_TYPE.SMALL) {
+		if (type === SHIP_TYPE.SMALL) {
 			// мы имеем только один индекс для однопалубного корабля..
 			const pivot = cellsIndexes[0];
 			const left = this.getNeighbors(pivot, mode, 'outside', 'start');

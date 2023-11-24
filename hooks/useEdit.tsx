@@ -151,7 +151,7 @@ export function useEdit(editId: string): UseEdit {
 			}
 
 			// заполняем ячейки вокруг корабля
-			fillNeardyCells(CellCalculator.getAllNeighbors(Array.from(cells), activeMode, activeShip));
+			fillNeardyCells(CellCalculator.getAllNeighbors(Array.from(cells)));
 
 			const updatedShipLeftValue = remainingShips[activeShip].left - 1;
 

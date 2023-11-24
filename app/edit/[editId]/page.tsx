@@ -1,4 +1,5 @@
-import { Field } from '@/app/components/edit/EditField';
+'use client';
+import { EditField } from '@/app/components';
 
 interface Params {
 	params: {
@@ -9,7 +10,7 @@ interface Params {
 export default function Edit({ params: { editId } }: Params) {
 	return (
 		<div className="w-full h-screen flex justify-center items-center">
-			<Field editId={editId} />
+			<EditField editId={editId} />
 		</div>
 	);
 }

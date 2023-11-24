@@ -1,3 +1,4 @@
+'use client';
 import { useMySession, useSession } from '@/hooks/session';
 import React from 'react';
 import { SessionCard } from './SessionCard';

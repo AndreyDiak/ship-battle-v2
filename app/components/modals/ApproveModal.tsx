@@ -1,3 +1,4 @@
+'use client';
 import { useApproveModal } from '@/hooks/modals/useApproveModal';
 import { useProfile } from '@/hooks/useProfile';
 import { Game } from '@/typings';

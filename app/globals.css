@@ -29,6 +29,10 @@ body {
 	}
 
 	.cell {
-		@apply flex justify-center items-center w-[70px] h-[70px] border-[1px] border-gray-200 text-2xl;
+		@apply flex justify-center items-center w-[70px] h-[70px] border-[1px] border-gray-200 text-2xl cursor-pointer;
+	}
+
+	.field {
+		@apply flex max-w-[710px] flex-wrap rounded-sm justify-center items-center;
 	}
 }

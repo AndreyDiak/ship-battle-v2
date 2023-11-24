@@ -1,6 +1,7 @@
-import { UseEdit, shipTypeToLengthMap } from '@/hooks';
+import { UseEdit } from '@/hooks';
 import { EDIT_MODE, SHIP_TYPE } from '@/typings';
 import { classNames } from '@/utils';
+import { shipTypeToLengthMap } from '@/utils/field/CellCalculator';
 import React from 'react';
 
 const modeMap: Record<EDIT_MODE, string> = {

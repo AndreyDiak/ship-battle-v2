@@ -30,7 +30,7 @@ export function useOpponentField(gameID: string, opponentID: string) {
 
 	const [field, setField] = useState(EMPTY_FIELD);
 
-	const updateOpponentField = useCallback(() => {
+	const updateField = useCallback(() => {
 		if (!rawDBField) return;
 		const DBfield = FieldConverter.convertFromApi(rawDBField);
 
@@ -51,16 +51,29 @@ export function useOpponentField(gameID: string, opponentID: string) {
 		setField(updatedField);
 	}, [field, rawDBField]);
 
+	const updateFieldByClick = useCallback(
+		(cellsIndexes: number[]) => {
+			let updatedField = [...field];
+			cellsIndexes.forEach((cellIndex) => {
+				updatedField[cellIndex].isTouched = true;
+			});
+			setField(updatedField);
+		},
+		[field],
+	);
+
 	/**
 	 * Вызываем обновление поля, только если у нас что-то поменялось в коллекции
 	 * Возможно, стоит добавить кеширование, чтобы полность не перезаписывать все поле
 	 */
 	useEffect(() => {
-		updateOpponentField();
+		updateField();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rawDBField]);
 
 	return {
 		field,
+		fieldID: rawDBField?.id,
+		updateFieldByClick,
 	};
 }
